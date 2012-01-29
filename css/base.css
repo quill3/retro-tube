@@ -1,0 +1,22 @@
+#header {
+  text-align: center;
+}
+#header img{
+  border: none;
+}
+#title {
+  font-size: 170%;
+  color: white;
+  background-color: red;
+  padding: 0.2em;
+}
+#footer {
+  color: #888888;
+  line-height: 1.5;
+  text-align: left;
+  padding:2em 0px;
+  margin:30px;
+}
+#footer img{
+  border: none;
+}

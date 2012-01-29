@@ -1,0 +1,4 @@
+cron:
+- description: get_videoinfo
+  url: /get_videoinfo
+  schedule: every 1 minutes

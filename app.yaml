@@ -1,0 +1,26 @@
+application: retro-tube
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+- url: /images
+  static_dir: images
+- url: /js
+  static_dir: js
+- url: /
+  static_files: index.html
+  upload: index.html
+- url: /favicon.ico
+  static_files: favicon.ico
+  upload: favicon.ico
+- url: /add_initdata
+  script: add_initdata.py
+  login: admin
+- url: /get_videoinfo
+  script: get_videoinfo.py
+  login: admin
+- url: /.*
+  script: show_list.py

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>RetroTube</title>
+  <meta name="description" content="懐メロ動画検索サイト" />
+  <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.7.1.custom.min.js"></script>
+  <script type="text/javascript" src="js/selectToUISlider.jQuery.js"></script>
+  <script type="text/javascript" src="js/jquery.prettyPhoto.js"></script>
+  <link rel="stylesheet" href="css/redmond/jquery-ui-1.7.1.custom.css" type="text/css" />
+  <link rel="Stylesheet" href="css/ui.slider.extras.css" type="text/css" />
+  <link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" />
+  <link rel="stylesheet" href="css/videogallery.css" type="text/css" />
+  <link rel="stylesheet" href="css/base.css" type="text/css" />
+  <style type="text/css">
+    body {font-size: 62.5%; font-family:"Segoe UI","Helvetica Neue",Helvetica,Arial,sans-serif; }
+    fieldset { border:0; margin: 6em; height: 6em;}  
+    label {font-weight: normal; float: left; margin-right: .5em; font-size: 1.1em;}
+    select {margin-right: 1em; float: left;}
+    .ui-slider {clear: both;}
+  </style>
+  <script type="text/javascript">
+    $(function(){
+      $('select#year').selectToUISlider({labels: 10,sliderOptions: {change:function(e,ui){getContents();}}}).hide();
+      
+      //fix color 
+      fixToolTipColor();
+    });
+
+    function getContents(){
+      var year = $('#year').val();
+      var http = $.get("show_list?year="+ year,null, function(data) {
+        $("#videogallery").html(data);
+        $("a[rel^='prettyPhoto']").prettyPhoto();
+      });
+    }
+    //purely for theme-switching demo... ignore this unless you're using a theme switcher
+    //quick function for tooltip color match
+    function fixToolTipColor(){
+      //grab the bg color from the tooltip content - set top border of pointer to same
+      $('.ui-tooltip-pointer-down-inner').each(function(){
+        var bWidth = $('.ui-tooltip-pointer-down-inner').css('borderTopWidth');
+        var bColor = $(this).parents('.ui-slider-tooltip').css('backgroundColor')
+        $(this).css('border-top', bWidth+' solid '+bColor);
+      });  
+    }
+  </script>
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-568420-2']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</head>
+<body>
+  <h1 id="header"><a href="http://www.retro-tube.com/"><img src="images/logo.gif" alt="RetroTube"/></a></h1>
+  <form action="#">
+    <fieldset>
+      <select name="year" id="year">
+        <optgroup label="60's">
+          <option value="1960" selected="selected">1960</option>
+          <option value="1961">1961</option>
+          <option value="1962">1962</option>
+          <option value="1963">1963</option>
+          <option value="1964">1964</option>
+          <option value="1965">1965</option>
+          <option value="1966">1966</option>
+          <option value="1967">1967</option>
+          <option value="1968">1968</option>
+          <option value="1969">1969</option>
+        </optgroup>
+        <optgroup label="70's">
+          <option value="1970">1970</option>
+          <option value="1971">1971</option>
+          <option value="1972">1972</option>
+          <option value="1973">1973</option>
+          <option value="1974">1974</option>
+          <option value="1975">1975</option>
+          <option value="1976">1976</option>
+          <option value="1977">1977</option>
+          <option value="1978">1978</option>
+          <option value="1979">1979</option>
+        </optgroup>
+        <optgroup label="80's">
+          <option value="1980">1980</option>
+          <option value="1981">1981</option>
+          <option value="1982">1982</option>
+          <option value="1983">1983</option>
+          <option value="1984">1984</option>
+          <option value="1985">1985</option>
+          <option value="1986">1986</option>
+          <option value="1987">1987</option>
+          <option value="1988">1988</option>
+          <option value="1989">1989</option>
+        </optgroup>
+        <optgroup label="90's">
+          <option value="1990">1990</option>
+          <option value="1991">1991</option>
+          <option value="1992">1992</option>
+          <option value="1993">1993</option>
+          <option value="1994">1994</option>
+          <option value="1995">1995</option>
+          <option value="1996">1996</option>
+          <option value="1997">1997</option>
+          <option value="1998">1998</option>
+          <option value="1999">1999</option>
+        </optgroup>
+        <optgroup label="00's">
+          <option value="2000">2000</option>
+          <option value="2001">2001</option>
+          <option value="2002">2002</option>
+          <option value="2003">2003</option>
+          <option value="2004">2004</option>
+          <option value="2005">2005</option>
+          <option value="2006">2006</option>
+          <option value="2007">2007</option>
+          <option value="2008">2008</option>
+          <option value="2009">2009</option>
+        </optgroup>
+      </select>
+    </fieldset>
+  </form>
+  <div id="videogallery">
+    <h2 id="title">上のスライダーで年代を指定してください。YouTubeから懐メロ動画を検索します。</h2>
+  </div>
+  <div id="footer">
+    <hr />
+    <p>
+    このWebサービスは<a href="http://d.hatena.ne.jp/quill3/" target="_blank" >quill3</a>が趣味で作りました。
+    （<a href="http://github.com/quill3/retro-tube" target="_blank" >ソースコード</a>と<a href="http://d.hatena.ne.jp/quill3/searchdiary?word=%2A%5BRetroTube%B3%AB%C8%AF%5D" target="_blank" >開発記録</a>を公開しています。）
+    </p>
+    <a href="http://b.hatena.ne.jp/entry/http%3A%2F%2Fwww.retro-tube.com%2F" class="hatena-bookmark-button" data-hatena-bookmark-title="RetroTube" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.retro-tube.com/" data-text="RetroTube" data-lang="ja">ツイート</a>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.retro-tube.com%2F&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;colorscheme=light&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:20px;" allowTransparency="true"></iframe>
+    <br />
+    <a href="http://code.google.com/intl/ja/appengine/" target="_blank"><img src="http://code.google.com/appengine/images/appengine-noborder-120x30.gif" alt="Powered by Google App Engine"/></a>
+  </div>
+</body>
+</html>
